@@ -1,24 +1,25 @@
 package com.model;
 
+import jakarta.persistence.*;
+
 import java.util.List;
 
+@Entity
+@Table(name = "developer")
 public class Developer {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private Long id;
+    @Column(name = "firstName")
     private String firstName;
+    @Column(name = "lastName")
     private String lastName;
+    @Column(name = "status")
     private Status status;
-    private Specialty specialty;
-    private List<Skill> skills;
-
-    public Developer() {}
-
-    public Developer(String firstName, String lastName, Status status, Specialty specialty, List<Skill> skills) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.status = status;
-        this.specialty = specialty;
-        this.skills = skills;
-    }
+//    private Specialty specialty;
+//    private List<Skill> skills;
 
     public Long getId() {
         return id;
@@ -26,6 +27,14 @@ public class Developer {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Developer() {}
+
+    public Developer(String firstName, String lastName, Status status) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.status = status;
     }
 
     public String getFirstName() {
@@ -52,21 +61,21 @@ public class Developer {
         this.status = status;
     }
 
-    public Specialty getSpecialty() {
-        return specialty;
-    }
-
-    public void setSpecialty(Specialty specialty) {
-        this.specialty = specialty;
-    }
-
-    public List<Skill> getSkills() {
-        return skills;
-    }
-
-    public void setSkills(List<Skill> skills) {
-        this.skills = skills;
-    }
+//    public Specialty getSpecialty() {
+//        return specialty;
+//    }
+//
+//    public void setSpecialty(Specialty specialty) {
+//        this.specialty = specialty;
+//    }
+//
+//    public List<Skill> getSkills() {
+//        return skills;
+//    }
+//
+//    public void setSkills(List<Skill> skills) {
+//        this.skills = skills;
+//    }
 
     @Override
     public String toString() {
@@ -75,8 +84,8 @@ public class Developer {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", status=" + status +
-                ", specialty=" + specialty +
-                ", skills=" + skills +
+//                ", specialty=" + specialty +
+//                ", skills=" + skills +
                 '}';
     }
 }
