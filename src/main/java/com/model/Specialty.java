@@ -1,7 +1,16 @@
 package com.model;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "specialty")
 public class Specialty {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", nullable = false)
     private Long id;
+    @Column(name = "name")
     private String name;
 
     public Specialty() {
