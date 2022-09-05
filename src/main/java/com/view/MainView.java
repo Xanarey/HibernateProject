@@ -24,6 +24,7 @@ public class MainView {
     }
 
     public static String MENU = """
+            =================================
             __________MENU__________
             1.  Выход
             ---Работа с DEVELOPERS---

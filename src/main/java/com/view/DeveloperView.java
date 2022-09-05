@@ -9,6 +9,7 @@ public class DeveloperView {
 
     public void getAllDeveloper() {
         for (Developer d: developerController.getAllDeveloper()) {
+            System.out.println("=================================");
             System.out.println("ID:           " + d.getId());
             System.out.println("FirstName:    " + d.getFirstName());
             System.out.println("LastName:     " + d.getLastName());
