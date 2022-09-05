@@ -5,7 +5,6 @@ import com.repository.DeveloperRepo;
 import com.utils.SessionUtils;
 import org.hibernate.Session;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class HibernateDevRepoImpl implements DeveloperRepo {
@@ -19,6 +18,7 @@ public class HibernateDevRepoImpl implements DeveloperRepo {
     public List<Developer> getAll() {
         Session session = SessionUtils.getSession();
         List<Developer> devList = session.createQuery("FROM Developer", Developer.class).list();
+        session.close();
         return devList;
     }
 

@@ -2,14 +2,12 @@ package com.model;
 
 import jakarta.persistence.*;
 
-import java.util.List;
-
 @Entity
 @Table(name = "developer")
 public class Developer {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
     @Column(name = "firstName")
@@ -17,9 +15,19 @@ public class Developer {
     @Column(name = "lastName")
     private String lastName;
     @Column(name = "status")
-    private Status status;
-//    private Specialty specialty;
-//    private List<Skill> skills;
+    private String status;
+    @Column(name = "specialty_id")
+    private int specialty_id;
+
+    public Developer() {
+    }
+
+    public Developer(String firstName, String lastName, String status, int specialty_id) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.status = status;
+        this.specialty_id = specialty_id;
+    }
 
     public Long getId() {
         return id;
@@ -27,14 +35,6 @@ public class Developer {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Developer() {}
-
-    public Developer(String firstName, String lastName, Status status) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.status = status;
     }
 
     public String getFirstName() {
@@ -53,29 +53,21 @@ public class Developer {
         this.lastName = lastName;
     }
 
-    public Status getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
-//    public Specialty getSpecialty() {
-//        return specialty;
-//    }
-//
-//    public void setSpecialty(Specialty specialty) {
-//        this.specialty = specialty;
-//    }
-//
-//    public List<Skill> getSkills() {
-//        return skills;
-//    }
-//
-//    public void setSkills(List<Skill> skills) {
-//        this.skills = skills;
-//    }
+    public int getSpecialty_id() {
+        return specialty_id;
+    }
+
+    public void setSpecialty_id(int specialty_id) {
+        this.specialty_id = specialty_id;
+    }
 
     @Override
     public String toString() {
@@ -83,9 +75,8 @@ public class Developer {
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", status=" + status +
-//                ", specialty=" + specialty +
-//                ", skills=" + skills +
+                ", status='" + status + '\'' +
+                ", specialty_id=" + specialty_id +
                 '}';
     }
 }
