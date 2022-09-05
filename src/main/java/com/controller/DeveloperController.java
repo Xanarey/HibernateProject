@@ -21,4 +21,6 @@ public class DeveloperController {
         return developerService.getAll();
     }
 
+    public Developer getDeveloperById(Long id) {return developerService.getDeveloperById(id);}
+
 }

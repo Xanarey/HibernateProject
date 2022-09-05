@@ -14,4 +14,7 @@ public class DeveloperService {
         return developerRepo.getAll();
     }
 
+    public Developer getDeveloperById(Long id) {
+        return developerRepo.getById(id);
+    }
 }

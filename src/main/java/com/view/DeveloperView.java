@@ -17,4 +17,13 @@ public class DeveloperView {
         }
     }
 
+    public void getDeveloperById(Long id) {
+        System.out.println("=================================");
+        Developer d = developerController.getDeveloperById(id);
+        System.out.println("ID:           " + d.getId());
+        System.out.println("FirstName:    " + d.getFirstName());
+        System.out.println("LastName:     " + d.getLastName());
+        System.out.println("Status:       " + d.getStatus());
+    }
+
 }
