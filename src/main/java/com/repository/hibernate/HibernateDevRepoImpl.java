@@ -1,7 +1,6 @@
 package com.repository.hibernate;
 
 import com.model.Developer;
-import com.model.Status;
 import com.repository.DeveloperRepo;
 import com.utils.HibernateUtil;
 import org.hibernate.Session;
@@ -52,11 +51,10 @@ public class HibernateDevRepoImpl implements DeveloperRepo {
     public Developer update(Developer developer) {
         Session session = HibernateUtil.getSession();
         session.beginTransaction();
-        Developer dev = session.get(Developer.class, developer.getId());
-        dev.setStatus("DELETED");
-        session.update(dev);
+        session.update(developer);
         session.getTransaction().commit();
-        return dev;
+        session.close();
+        return developer;
     }
 
 }
