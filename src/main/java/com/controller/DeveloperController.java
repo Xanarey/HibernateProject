@@ -23,4 +23,7 @@ public class DeveloperController {
 
     public Developer getDeveloperById(Long id) {return developerService.getDeveloperById(id);}
 
+    public Developer insert(Developer developer) {
+        return developerService.insert(developer);
+    }
 }

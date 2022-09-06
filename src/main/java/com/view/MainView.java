@@ -1,5 +1,6 @@
 package com.view;
 
+import java.util.Objects;
 import java.util.Scanner;
 
 public class MainView {
@@ -27,6 +28,11 @@ public class MainView {
                 developerView.getDeveloperById(ID);
             }
 
+            if (CHOICE_MENU == 6) {
+                developerView.insert();
+                System.out.println("Разработчик успешно добавлен");
+            }
+
         } while (CHOICE_MENU != 1);
 
     }
@@ -38,6 +44,7 @@ public class MainView {
             ---Работа с DEVELOPERS---
             2.  Вывести всех разработчиков
             3.  Вывести разработчика
+            6.  Добавить разработчика (авто)
             """;
 
     public static Long ID = 0L;
