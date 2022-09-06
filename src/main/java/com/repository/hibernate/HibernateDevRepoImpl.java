@@ -1,6 +1,7 @@
 package com.repository.hibernate;
 
 import com.model.Developer;
+import com.model.Specialty;
 import com.repository.DeveloperRepo;
 import com.utils.HibernateUtil;
 import org.hibernate.Session;
@@ -28,6 +29,7 @@ public class HibernateDevRepoImpl implements DeveloperRepo {
         session.close();
         return devList;
     }
+
     @Override
     public Developer getById(Long id) {
         Session session = HibernateUtil.getSession();
