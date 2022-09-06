@@ -28,9 +28,24 @@ public class MainView {
                 developerView.getDeveloperById(ID);
             }
 
+            if (CHOICE_MENU == 5) {
+                do {
+                    System.out.println("Введите id: ");
+                    ID = 34L;
+                } while (ID <= 0);
+                developerView.delete(ID);
+            }
+
             if (CHOICE_MENU == 6) {
+                do {
+                    System.out.println("Введите id для изменения статуса на (DELETED):");
+                    ID = scanner.nextLong();
+                } while (ID <= 0);
+                developerView.changeStatus(ID);
+            }
+
+            if (CHOICE_MENU == 7) {
                 developerView.insert();
-                System.out.println("Разработчик успешно добавлен");
             }
 
         } while (CHOICE_MENU != 1);
@@ -44,7 +59,9 @@ public class MainView {
             ---Работа с DEVELOPERS---
             2.  Вывести всех разработчиков
             3.  Вывести разработчика
-            6.  Добавить разработчика (авто)
+            5.  Удалить разработчика
+            6.  Удалить разработчика (установить статус DELETED)
+            7.  Добавить разработчика (авто)
             """;
 
     public static Long ID = 0L;

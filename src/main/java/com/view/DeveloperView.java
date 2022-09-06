@@ -33,5 +33,16 @@ public class DeveloperView {
         System.out.println("FirstName:    " + d.getFirstName());
         System.out.println("LastName:     " + d.getLastName());
         System.out.println("Status:       " + d.getStatus());
+        System.out.println("Разработчик успешно добавлен");
+    }
+
+    public void delete(Long id) {
+        developerController.deleteById(id);
+        System.out.println("Пользователь с ID: " + 34 + " удален");
+    }
+
+    public void changeStatus(Long id) {
+        developerController.changeStatusOnDeleted(id);
+        System.out.println("Статус пользователя с ID: " + id + " изменен");
     }
 }

@@ -1,10 +1,10 @@
 package com.repository.hibernate;
 
 import com.model.Developer;
+import com.model.Status;
 import com.repository.DeveloperRepo;
 import com.utils.HibernateUtil;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ public class HibernateDevRepoImpl implements DeveloperRepo {
     public Developer insert(Developer developer) {
         Session session = HibernateUtil.getSession();
         session.beginTransaction();
-        Developer dev = new Developer("A", "B", "ACTIVE", 1);
+        Developer dev = new Developer("A", "B", "DELETED", 1);
         // TODO собрать сверху
         session.persist(dev);
         session.getTransaction().commit();
@@ -25,7 +25,7 @@ public class HibernateDevRepoImpl implements DeveloperRepo {
     @Override
     public List<Developer> getAll() {
         Session session = HibernateUtil.getSession();
-        List<Developer> devList = session.createQuery("FROM Developer", Developer.class).list();
+        List<Developer> devList = session.createQuery("FROM Developer", Developer.class).list(); // TODO переделать String на STATUS
         session.close();
         return devList;
     }
@@ -38,13 +38,25 @@ public class HibernateDevRepoImpl implements DeveloperRepo {
     }
 
     @Override
-    public void deleteById(Long aLong) {
-
+    public void deleteById(Long id) {
+        Session session = HibernateUtil.getSession();
+        session.beginTransaction();
+        Developer developer = session.get(Developer.class, 35);
+        // TODO взять ID сверху
+        session.delete(developer);
+        session.getTransaction().commit();
+        session.close();
     }
 
     @Override
     public Developer update(Developer developer) {
-        return null;
+        Session session = HibernateUtil.getSession();
+        session.beginTransaction();
+        Developer dev = session.get(Developer.class, developer.getId());
+        dev.setStatus("DELETED");
+        session.update(dev);
+        session.getTransaction().commit();
+        return dev;
     }
 
 }

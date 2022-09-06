@@ -21,4 +21,12 @@ public class DeveloperService {
     public Developer insert(Developer developer) {
         return developerRepo.insert(developer);
     }
+
+    public void deleteById(Long id) {
+        developerRepo.deleteById(id);
+    }
+
+    public Developer update(Developer developer) {
+        return developerRepo.update(developer);
+    }
 }

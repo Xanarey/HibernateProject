@@ -26,4 +26,14 @@ public class DeveloperController {
     public Developer insert(Developer developer) {
         return developerService.insert(developer);
     }
+
+    public void deleteById(Long id) {
+        developerService.deleteById(id);
+    }
+
+    public void changeStatusOnDeleted(Long id) {
+        Developer developer = new Developer();
+        developer.setId(id);
+        developerService.update(developer);
+    }
 }
