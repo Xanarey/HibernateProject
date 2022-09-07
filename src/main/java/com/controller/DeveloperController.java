@@ -1,7 +1,6 @@
 package com.controller;
 
 import com.model.Developer;
-import com.model.Status;
 import com.service.DeveloperService;
 
 import java.util.List;

@@ -26,13 +26,12 @@ public class DeveloperView {
         System.out.println("Status:       " + d.getStatus());
     }
 
-    public void insert() {
+    public void insert(Developer developer) {
         System.out.println("=================================");
-        Developer d = developerController.insert(new Developer());
+        Developer d = developerController.insert(developer);
         System.out.println("ID:           " + d.getId());
         System.out.println("FirstName:    " + d.getFirstName());
         System.out.println("LastName:     " + d.getLastName());
-        System.out.println("Status:       " + d.getStatus());
         System.out.println("Разработчик успешно добавлен");
     }
 

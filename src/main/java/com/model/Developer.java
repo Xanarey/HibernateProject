@@ -2,8 +2,6 @@ package com.model;
 
 import jakarta.persistence.*;
 
-import java.util.List;
-
 @Entity
 @Table(name = "developer")
 public class Developer {
@@ -19,15 +17,15 @@ public class Developer {
     @Column(name = "status")
     private String status;
     @Column(name = "specialty_id")
-    private int specialty_id;
+    private Long specialty_id;
 
     //TODO остановился здесь
-    private Specialty specialty;
+//    private Specialty specialty;
 
     public Developer() {
     }
 
-    public Developer(String firstName, String lastName, String status, int specialty_id) {
+    public Developer(String firstName, String lastName, String status, Long specialty_id) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.status = status;
@@ -64,17 +62,13 @@ public class Developer {
         this.status = status;
     }
 
-    public int getSpecialty_id() {
+    public Long getSpecialty_id() {
         return specialty_id;
     }
 
-    public void setSpecialty_id(int specialty_id) {
+    public void setSpecialty_id(Long specialty_id) {
         this.specialty_id = specialty_id;
     }
-
-    public Specialty getSpecialty() {return specialty;}
-
-    public void setSpecialty(Specialty specialty) {this.specialty = specialty;}
 
     @Override
     public String toString() {
@@ -84,7 +78,6 @@ public class Developer {
                 ", lastName='" + lastName + '\'' +
                 ", status='" + status + '\'' +
                 ", specialty_id=" + specialty_id +
-                ", specialty=" + specialty +
                 '}';
     }
 }

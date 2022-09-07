@@ -1,5 +1,9 @@
 package com.view;
 
+import com.model.Developer;
+import com.model.Specialty;
+import com.model.Status;
+
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -7,6 +11,7 @@ public class MainView {
 
     private final Scanner scanner = new Scanner(System.in);
     private final DeveloperView developerView = new DeveloperView();
+    private final SpecialtyView specialtyView = new SpecialtyView();
 
     public MainView() {}
 
@@ -28,7 +33,7 @@ public class MainView {
                 developerView.getDeveloperById(ID);
             }
 
-            if (CHOICE_MENU == 5) {
+            if (CHOICE_MENU == 4) {
                 do {
                     System.out.println("Введите id: ");
                     ID = 34L;
@@ -36,7 +41,7 @@ public class MainView {
                 developerView.delete(ID);
             }
 
-            if (CHOICE_MENU == 6) {
+            if (CHOICE_MENU == 5) {
                 do {
                     System.out.println("Введите id для изменения статуса на (DELETED):");
                     ID = scanner.nextLong();
@@ -44,8 +49,34 @@ public class MainView {
                 developerView.changeStatus(ID);
             }
 
+            if (CHOICE_MENU == 6) {
+                System.out.println("Введите First_Name:");
+                do {
+                    FIRST_NAME = scanner.nextLine();
+                } while (Objects.equals(FIRST_NAME, ""));
+
+                System.out.println("Введите Last_Name:");
+                do {
+                    LAST_NAME = scanner.nextLine();
+                } while (Objects.equals(LAST_NAME, ""));
+                specialtyView.getAllSpecialty();
+                System.out.println("Выберите специальность по id: ");
+                do {
+                    SPECIALTY_ID = scanner.nextLong();
+                } while (SPECIALTY_ID <= 0);
+                developerView.insert(new Developer(FIRST_NAME, LAST_NAME, "ACTIVE", SPECIALTY_ID));
+            }
+
             if (CHOICE_MENU == 7) {
-                developerView.insert();
+                specialtyView.getAllSpecialty();
+            }
+
+            if (CHOICE_MENU == 8) {
+                System.out.println("Введите id:");
+                do {
+                    SPECIALTY_ID = scanner.nextLong();
+                } while (SPECIALTY_ID <= 0);
+                specialtyView.getSpecialtyById(SPECIALTY_ID);
             }
 
         } while (CHOICE_MENU != 1);
@@ -59,9 +90,11 @@ public class MainView {
             ---Работа с DEVELOPERS---
             2.  Вывести всех разработчиков
             3.  Вывести разработчика
-            5.  Удалить разработчика
-            6.  Удалить разработчика (установить статус DELETED)
-            7.  Добавить разработчика (авто)
+            4.  Удалить разработчика
+            5.  Удалить разработчика (установить статус DELETED)
+            6.  Добавить разработчика
+            7.  Вывести все специальности
+            8.  Получить специальность по id
             """;
 
     public static Long ID = 0L;

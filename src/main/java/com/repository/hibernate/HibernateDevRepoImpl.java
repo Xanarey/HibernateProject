@@ -1,7 +1,6 @@
 package com.repository.hibernate;
 
 import com.model.Developer;
-import com.model.Specialty;
 import com.repository.DeveloperRepo;
 import com.utils.HibernateUtil;
 import org.hibernate.Session;
@@ -9,18 +8,6 @@ import org.hibernate.Session;
 import java.util.List;
 
 public class HibernateDevRepoImpl implements DeveloperRepo {
-
-    @Override
-    public Developer insert(Developer developer) {
-        Session session = HibernateUtil.getSession();
-        session.beginTransaction();
-        Developer dev = new Developer("A", "B", "DELETED", 1);
-        // TODO собрать сверху
-        session.persist(dev);
-        session.getTransaction().commit();
-        session.close();
-        return dev;
-    }
 
     @Override
     public List<Developer> getAll() {
@@ -36,6 +23,16 @@ public class HibernateDevRepoImpl implements DeveloperRepo {
         Developer developer = session.get(Developer.class, id);
         session.close();
         return developer;
+    }
+
+    @Override
+    public Developer insert(Developer developer) {
+        Session session = HibernateUtil.getSession();
+        session.beginTransaction();
+        session.persist(developer);
+        session.getTransaction().commit();
+        session.close();
+        return developer; // TODO проверить работу после репо Specialty
     }
 
     @Override
