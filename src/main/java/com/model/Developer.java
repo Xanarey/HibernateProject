@@ -15,6 +15,7 @@ public class Developer {
     @Column(name = "lastName")
     private String lastName;
     @Column(name = "status")
+    @Enumerated(EnumType.STRING)
     private Status status;
     @Column(name = "specialty_id")
     private Long specialty_id;
