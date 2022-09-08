@@ -1,6 +1,7 @@
 package com.controller;
 
 import com.model.Developer;
+import com.model.Status;
 import com.service.DeveloperService;
 
 import java.util.List;
@@ -33,7 +34,7 @@ public class DeveloperController {
 
     public void changeStatusOnDeleted(Long id) {
         Developer developer = developerService.getDeveloperById(id);
-        developer.setStatus("DELETED");
+        developer.setStatus(Status.DELETED);
         developerService.update(developer);
     }
 }

@@ -36,7 +36,7 @@ public class MainView {
             if (CHOICE_MENU == 4) {
                 do {
                     System.out.println("Введите id: ");
-                    ID = 34L;
+                    ID = scanner.nextLong();
                 } while (ID <= 0);
                 developerView.delete(ID);
             }
@@ -64,7 +64,7 @@ public class MainView {
                 do {
                     SPECIALTY_ID = scanner.nextLong();
                 } while (SPECIALTY_ID <= 0);
-                developerView.insert(new Developer(FIRST_NAME, LAST_NAME, "ACTIVE", SPECIALTY_ID));
+                developerView.insert(new Developer(FIRST_NAME, LAST_NAME, Status.ACTIVE, SPECIALTY_ID));
             }
 
             if (CHOICE_MENU == 7) {

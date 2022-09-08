@@ -15,7 +15,7 @@ public class Developer {
     @Column(name = "lastName")
     private String lastName;
     @Column(name = "status")
-    private String status;
+    private Status status;
     @Column(name = "specialty_id")
     private Long specialty_id;
 
@@ -25,7 +25,7 @@ public class Developer {
     public Developer() {
     }
 
-    public Developer(String firstName, String lastName, String status, Long specialty_id) {
+    public Developer(String firstName, String lastName, Status status, Long specialty_id) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.status = status;
@@ -54,11 +54,11 @@ public class Developer {
 
     public void setLastName(String lastName) {this.lastName = lastName;}
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 

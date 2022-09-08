@@ -12,7 +12,7 @@ public class HibernateDevRepoImpl implements DeveloperRepo {
     @Override
     public List<Developer> getAll() {
         Session session = HibernateUtil.getSession();
-        List<Developer> devList = session.createQuery("FROM Developer", Developer.class).list(); // TODO переделать String на STATUS
+        List<Developer> devList = session.createQuery("FROM Developer", Developer.class).list();
         session.close();
         return devList;
     }
@@ -32,15 +32,14 @@ public class HibernateDevRepoImpl implements DeveloperRepo {
         session.persist(developer);
         session.getTransaction().commit();
         session.close();
-        return developer; // TODO проверить работу после репо Specialty
+        return developer;
     }
 
     @Override
     public void deleteById(Long id) {
         Session session = HibernateUtil.getSession();
         session.beginTransaction();
-        Developer developer = session.get(Developer.class, 35);
-        // TODO взять ID сверху
+        Developer developer = session.get(Developer.class, id);
         session.delete(developer);
         session.getTransaction().commit();
         session.close();

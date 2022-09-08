@@ -37,7 +37,7 @@ public class DeveloperView {
 
     public void delete(Long id) {
         developerController.deleteById(id);
-        System.out.println("Пользователь с ID: " + 34 + " удален");
+        System.out.println("Пользователь с ID: " + id + " удален");
     }
 
     public void changeStatus(Long id) {
