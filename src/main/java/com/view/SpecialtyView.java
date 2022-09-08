@@ -23,9 +23,8 @@ public class SpecialtyView {
     }
 
     public void deleteSpecialtyById(Long id) {
-        specialtyController.getSpecialtyById(id);
-        System.out.println("Специальность удалена");
         specialtyController.deleteById(id);
+        System.out.println("Специальность удалена");
     }
 
     public void updateSpecialty(Long id, String name) {
@@ -33,7 +32,8 @@ public class SpecialtyView {
     }
 
     public void insertSpecialty(String name) {
-
+        Specialty specialty = new Specialty(name);
+        specialtyController.insert(specialty);
     }
 
 }

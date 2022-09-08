@@ -79,6 +79,38 @@ public class MainView {
                 specialtyView.getSpecialtyById(SPECIALTY_ID);
             }
 
+            if (CHOICE_MENU == 9) {
+                System.out.println("Введите имя новой специальности: ");
+                do {
+                    SPECIALTY_NAME = scanner.nextLine();
+                } while (SPECIALTY_NAME.equals(""));
+                specialtyView.insertSpecialty(SPECIALTY_NAME);
+                System.out.println("Специальность успешно добавлена");
+            }
+
+            if (CHOICE_MENU == 10) {
+                specialtyView.getAllSpecialty();
+                System.out.println("Выберите id удаляемой специальности: " + "\n");
+                do {
+                    ID = scanner.nextLong();
+                } while (ID <= 0);
+                specialtyView.deleteSpecialtyById(ID);
+            }
+
+            if (CHOICE_MENU == 11) {
+                specialtyView.getAllSpecialty();
+                System.out.println("Выберите изменяемую специальность по id: ");
+                do {
+                    SPECIALTY_ID = scanner.nextLong();
+                } while (SPECIALTY_ID <= 0);
+                System.out.println("Введите новое название специальности: ");
+                do {
+                    SPECIALTY_NAME = scanner.nextLine();
+                } while (SPECIALTY_NAME.equals(""));
+                specialtyView.updateSpecialty(SPECIALTY_ID, SPECIALTY_NAME);
+                System.out.println("Специальность успешно изменена");
+            }
+
         } while (CHOICE_MENU != 1);
 
     }
@@ -93,8 +125,12 @@ public class MainView {
             4.  Удалить разработчика
             5.  Удалить разработчика (установить статус DELETED)
             6.  Добавить разработчика
+            ---Работа с SPECIALTY---
             7.  Вывести все специальности
             8.  Получить специальность по id
+            9.  Добавить специальность
+            10. Удалить специальность
+            11. Изменить специальность
             """;
 
     public static Long ID = 0L;

@@ -27,17 +27,32 @@ public class HibernateSpecRepoImpl implements SpecialtyRepo  {
 
     @Override
     public Specialty insert(Specialty specialty) {
-        return null;
+        Session session = HibernateUtil.getSession();
+        session.beginTransaction();
+        session.persist(specialty);
+        session.getTransaction().commit();
+        session.close();
+        return specialty;
     }
 
     @Override
-    public void deleteById(Long aLong) {
-
+    public void deleteById(Long id) {
+        Session session = HibernateUtil.getSession();
+        session.beginTransaction();
+        Specialty specialty = session.get(Specialty.class, id);
+        session.delete(specialty);
+        session.getTransaction().commit();
+        session.close();
     }
 
     @Override
     public Specialty update(Specialty specialty) {
-        return null;
+        Session session = HibernateUtil.getSession();
+        session.beginTransaction();
+        session.update(specialty);
+        session.getTransaction().commit();
+        session.close();
+        return specialty;
     }
 
 }
