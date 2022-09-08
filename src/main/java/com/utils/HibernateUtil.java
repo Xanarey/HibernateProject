@@ -26,7 +26,6 @@ public class HibernateUtil {
             StandardServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
                     .configure("hibernate.cfg.xml").build();
 
-            //
 
             Metadata metadata = new MetadataSources(serviceRegistry).getMetadataBuilder().build();
 
