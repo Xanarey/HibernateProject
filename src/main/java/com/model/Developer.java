@@ -2,10 +2,11 @@ package com.model;
 
 import jakarta.persistence.*;
 
+
 import java.util.List;
 
 @Entity
-@Table(name = "developer")
+@Table(name = "developers")
 public class Developer {
 
     @Id
@@ -22,16 +23,27 @@ public class Developer {
     @Column(name = "specialty_id")
     private Long specialty_id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "specialty_id", referencedColumnName = "id", insertable = false, updatable = false)
     private Specialty specialty;
 
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "id", referencedColumnName = "id", insertable = false, updatable = false)
-    private List<Skill> skillList;
+    @ManyToMany(targetEntity = Skill.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(name = "developers_skills",
+               joinColumns = @JoinColumn(name = "developers_id"),
+               inverseJoinColumns = @JoinColumn(name = "skills_id"))
+    private List<Skill> skills;
+
+    public List<Skill> getSkills() {
+        return skills;
+    }
+
+    public void setSkills(List<Skill> skills) {
+        this.skills = skills;
+    }
 
     public Developer() {
+
     }
 
     public Developer(String firstName, String lastName, Status status, Long specialty_id, Specialty specialty, List<Skill> skillList) {
@@ -40,7 +52,7 @@ public class Developer {
         this.status = status;
         this.specialty_id = specialty_id;
         this.specialty = specialty;
-        this.skillList = skillList;
+        this.skills = skillList;
     }
 
     public Long getId() {
@@ -85,9 +97,9 @@ public class Developer {
 
     public void setSpecialty(Specialty specialty) {this.specialty = specialty;}
 
-    public List<Skill> getSkillList() {return skillList;}
+    public List<Skill> getSkillList() {return skills;}
 
-    public void setSkillList(List<Skill> skillList) {this.skillList = skillList;}
+    public void setSkillList(List<Skill> skillList) {this.skills = skillList;}
 
     @Override
     public String toString() {
@@ -98,7 +110,7 @@ public class Developer {
                 ", status=" + status +
                 ", specialty_id=" + specialty_id +
                 ", specialty=" + specialty +
-                ", skillList=" + skillList +
+                ", skillList=" + skills +
                 '}';
     }
 }
