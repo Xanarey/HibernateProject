@@ -2,6 +2,8 @@ package com.view;
 
 import com.controller.DeveloperController;
 import com.model.Developer;
+import com.model.Specialty;
+import com.model.Status;
 
 public class DeveloperView {
 
@@ -38,6 +40,17 @@ public class DeveloperView {
     public void delete(Long id) {
         developerController.deleteById(id);
         System.out.println("Пользователь с ID: " + id + " удален");
+    }
+
+    public void updateDeveloper (Long id, String firstName, String lastName, Long specialty) {
+        Developer developer = new Developer();
+        developer.setId(id);
+        developer.setFirstName(firstName);
+        developer.setLastName(lastName);
+        developer.setStatus(Status.ACTIVE);
+        developer.setSpecialty_id(specialty);
+        developerController.update(developer);
+        System.out.println("Данные о разработчике обновлены");
     }
 
     public void changeStatus(Long id) {

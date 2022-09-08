@@ -37,4 +37,9 @@ public class DeveloperController {
         developer.setStatus(Status.DELETED);
         developerService.update(developer);
     }
+
+    public Developer update(Developer developer) {
+        developerService.update(developer);
+        return developer;
+    }
 }
