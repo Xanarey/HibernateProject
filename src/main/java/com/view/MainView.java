@@ -108,7 +108,6 @@ public class MainView {
                     SPECIALTY_NAME = scanner.nextLine();
                 } while (SPECIALTY_NAME.equals(""));
                 specialtyView.updateSpecialty(SPECIALTY_ID, SPECIALTY_NAME);
-                System.out.println("Специальность успешно изменена");
             }
 
         } while (CHOICE_MENU != 1);

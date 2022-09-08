@@ -31,4 +31,9 @@ public class SpecialtyController {
         specialtyService.deleteById(id);
     }
 
+    public Specialty update(Specialty specialty) {
+        specialtyService.update(specialty);
+        return specialty;
+    }
+
 }

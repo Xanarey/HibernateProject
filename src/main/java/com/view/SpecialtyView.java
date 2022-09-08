@@ -28,7 +28,10 @@ public class SpecialtyView {
     }
 
     public void updateSpecialty(Long id, String name) {
-
+        Specialty specialty = specialtyController.getSpecialtyById(id);
+        specialty.setName(name);
+        specialtyController.update(specialty);
+        System.out.println("Специальность обновлена");
     }
 
     public void insertSpecialty(String name) {
