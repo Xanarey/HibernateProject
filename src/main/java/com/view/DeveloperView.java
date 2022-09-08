@@ -2,7 +2,6 @@ package com.view;
 
 import com.controller.DeveloperController;
 import com.model.Developer;
-import com.model.Specialty;
 import com.model.Status;
 
 public class DeveloperView {
@@ -16,6 +15,8 @@ public class DeveloperView {
             System.out.println("FirstName:    " + d.getFirstName());
             System.out.println("LastName:     " + d.getLastName());
             System.out.println("Status:       " + d.getStatus());
+            System.out.println("Specialty:    " + d.getSpecialty().getName());
+            System.out.println("Skills:       " + d.getSkillList());
         }
     }
 
@@ -26,6 +27,8 @@ public class DeveloperView {
         System.out.println("FirstName:    " + d.getFirstName());
         System.out.println("LastName:     " + d.getLastName());
         System.out.println("Status:       " + d.getStatus());
+        System.out.println("Specialty:    " + d.getSpecialty().getName());
+        System.out.println("Skills:       " + d.getSkillList());
     }
 
     public void insert(Developer developer) {

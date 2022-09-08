@@ -2,6 +2,7 @@ package com.model;
 
 import jakarta.persistence.*;
 
+
 @Entity
 @Table(name = "skills")
 public class Skill {

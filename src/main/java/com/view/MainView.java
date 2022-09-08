@@ -1,8 +1,12 @@
 package com.view;
 
 import com.model.Developer;
+import com.model.Skill;
+import com.model.Specialty;
 import com.model.Status;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -64,7 +68,17 @@ public class MainView {
                 do {
                     SPECIALTY_ID = scanner.nextLong();
                 } while (SPECIALTY_ID <= 0);
-                developerView.insert(new Developer(FIRST_NAME, LAST_NAME, Status.ACTIVE, SPECIALTY_ID));
+                Specialty specialty = new Specialty();
+                specialty.setId(SPECIALTY_ID);
+                System.out.println("Выберите скилл по id: ");
+                do {
+                    SKILL_ID = scanner.nextLong();
+                } while (SKILL_ID <= 0);
+                List<Skill> skillList = new ArrayList<>();
+                Skill skill = new Skill();
+                skill.setId(SKILL_ID);
+                skillList.add(skill);
+                developerView.insert(new Developer(FIRST_NAME, LAST_NAME, Status.ACTIVE, SPECIALTY_ID, specialty, skillList));
             }
 
             if (CHOICE_MENU == 66) {

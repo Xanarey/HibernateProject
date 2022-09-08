@@ -2,6 +2,8 @@ package com.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "developer")
 public class Developer {
@@ -20,17 +22,25 @@ public class Developer {
     @Column(name = "specialty_id")
     private Long specialty_id;
 
-    //TODO остановился здесь
-//    private Specialty specialty;
+    @ManyToOne
+    @JoinColumn(name = "specialty_id", referencedColumnName = "id", insertable = false, updatable = false)
+    private Specialty specialty;
+
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "id", referencedColumnName = "id", insertable = false, updatable = false)
+    private List<Skill> skillList;
 
     public Developer() {
     }
 
-    public Developer(String firstName, String lastName, Status status, Long specialty_id) {
+    public Developer(String firstName, String lastName, Status status, Long specialty_id, Specialty specialty, List<Skill> skillList) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.status = status;
         this.specialty_id = specialty_id;
+        this.specialty = specialty;
+        this.skillList = skillList;
     }
 
     public Long getId() {
@@ -71,14 +81,24 @@ public class Developer {
         this.specialty_id = specialty_id;
     }
 
+    public Specialty getSpecialty() {return specialty;}
+
+    public void setSpecialty(Specialty specialty) {this.specialty = specialty;}
+
+    public List<Skill> getSkillList() {return skillList;}
+
+    public void setSkillList(List<Skill> skillList) {this.skillList = skillList;}
+
     @Override
     public String toString() {
         return "Developer{" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", status='" + status + '\'' +
+                ", status=" + status +
                 ", specialty_id=" + specialty_id +
+                ", specialty=" + specialty +
+                ", skillList=" + skillList +
                 '}';
     }
 }
