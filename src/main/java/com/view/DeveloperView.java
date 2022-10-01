@@ -24,8 +24,8 @@ public class DeveloperView {
             System.out.println("FirstName:    " + d.getFirstname());
             System.out.println("LastName:     " + d.getLastname());
             System.out.println("Status:       " + d.getStatus());
-            System.out.println("Specialty:    " + d.getSpecialty().getName());
-            System.out.println("Skills:       " + d.getSkills());
+//            System.out.println("Specialty:    " + d.getSpecialty().getName());
+//            System.out.println("Skills:       " + d.getSkills());
         }
     }
 

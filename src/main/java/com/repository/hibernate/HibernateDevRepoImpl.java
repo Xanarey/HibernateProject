@@ -4,6 +4,7 @@ import com.model.Developer;
 import com.repository.DeveloperRepo;
 import com.utils.HibernateUtil;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import java.util.List;
 
@@ -11,8 +12,16 @@ public class HibernateDevRepoImpl implements DeveloperRepo {
 
     @Override
     public List<Developer> getAll() {
-        return HibernateUtil.getSession()
-                .createQuery("FROM Developer").list();
+        List<Developer> developerList = null;
+        Transaction transaction = null;
+        try(Session session = HibernateUtil.getSession()) {
+            transaction = session.beginTransaction();
+            developerList = session.createQuery("FROM Developer", Developer.class).list();
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return developerList;
     }
 
     @Override
