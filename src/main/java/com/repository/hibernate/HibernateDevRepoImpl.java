@@ -6,6 +6,7 @@ import com.utils.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.net.Inet4Address;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +30,7 @@ public class HibernateDevRepoImpl implements DeveloperRepo {
     public Developer getById(Long id) {
         Developer developer = new Developer();
         try (Session session = HibernateUtil.getSession()){
-            developer =  (Developer) session.createQuery("SELECT d FROM Developer d JOIN FETCH d.skills JOIN FETCH d.specialty WHERE d.id = 3").getSingleResult();
+            developer =  (Developer) session.createQuery("SELECT d FROM Developer d JOIN FETCH d.skills JOIN FETCH d.specialty WHERE d.id = (:id)").setParameter("id", id).getSingleResult();
         } catch (Exception e) {
             e.printStackTrace();
         }
