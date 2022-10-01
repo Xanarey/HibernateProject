@@ -11,25 +11,19 @@ public class HibernateSpecRepoImpl implements SpecialtyRepo  {
 
     @Override
     public List<Specialty> getAll() {
-        Session session = HibernateUtil.getSession();
-        List<Specialty> specList = session.createQuery("FROM Specialty", Specialty.class).list();
-        session.close();
-        return specList;
+        return HibernateUtil.getSession().createQuery("FROM Specialty", Specialty.class).list();
     }
 
     @Override
     public Specialty getById(Long id) {
-        Session session = HibernateUtil.getSession();
-        Specialty specialty = session.get(Specialty.class, id);
-        session.close();
-        return specialty;
+        return HibernateUtil.getSession().get(Specialty.class, id);
     }
 
     @Override
     public Specialty insert(Specialty specialty) {
         Session session = HibernateUtil.getSession();
         session.beginTransaction();
-        session.persist(specialty);
+        session.merge(specialty);
         session.getTransaction().commit();
         session.close();
         return specialty;
@@ -39,19 +33,14 @@ public class HibernateSpecRepoImpl implements SpecialtyRepo  {
     public void deleteById(Long id) {
         Session session = HibernateUtil.getSession();
         session.beginTransaction();
-        Specialty specialty = session.get(Specialty.class, id);
-        session.delete(specialty);
+        session.remove(session.get(Specialty.class, id));
         session.getTransaction().commit();
         session.close();
     }
 
     @Override
     public Specialty update(Specialty specialty) {
-        Session session = HibernateUtil.getSession();
-        session.beginTransaction();
-        session.update(specialty);
-        session.getTransaction().commit();
-        session.close();
+        insert(specialty);
         return specialty;
     }
 

@@ -70,6 +70,7 @@ public class MainView {
                 } while (SPECIALTY_ID <= 0);
                 Specialty specialty = new Specialty();
                 specialty.setId(SPECIALTY_ID);
+                skillView.getAllSkills();
                 System.out.println("Выберите скилл по id: ");
                 do {
                     SKILL_ID = scanner.nextLong();
@@ -160,6 +161,7 @@ public class MainView {
             }
 
             if (CHOICE_MENU == 14) {
+                skillView.getAllSkills();
                 System.out.println("Введите id изменяемого скилла: ");
                 do {
                     SKILL_ID = scanner.nextLong();
@@ -172,6 +174,7 @@ public class MainView {
             }
 
             if (CHOICE_MENU == 15) {
+                skillView.getAllSkills();
                 System.out.println("Введите id удаляемого скилла: ");
                 do {
                     SKILL_ID = scanner.nextLong();

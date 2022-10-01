@@ -8,7 +8,15 @@ import java.util.List;
 
 public class SkillService {
 
-    private final SkillRepo skillRepository = new HibernateSkillRepoImpl();
+    private final SkillRepo skillRepository;
+
+    public SkillService() {
+        skillRepository = new HibernateSkillRepoImpl();
+    }
+
+    public SkillService(SkillRepo skillRepository) {
+        this.skillRepository = skillRepository;
+    }
 
     public Skill getById(Long aLong) {
         return skillRepository.getById(aLong);

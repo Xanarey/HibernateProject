@@ -9,17 +9,11 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 public class HibernateUtil {
 
-    public static Session getCurrentSessionNow() {
-        return getSessionFactory().getCurrentSession();
-    }
-
     public static Session getSession() {
         return getSessionFactory().openSession();
     }
 
-    private static SessionFactory getSessionFactory() {
-        return buildSessionFactory();
-    }
+    private static SessionFactory getSessionFactory() {return buildSessionFactory();}
 
     private static SessionFactory buildSessionFactory() {
         try {
@@ -35,4 +29,3 @@ public class HibernateUtil {
         }
     }
 }
-//

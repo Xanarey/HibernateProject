@@ -8,11 +8,17 @@ import java.util.List;
 
 public class DeveloperService {
 
-    private final DeveloperRepo developerRepo = new HibernateDevRepoImpl();
+    private final DeveloperRepo developerRepo;
 
-    public List<Developer> getAll() {
-        return developerRepo.getAll();
+    public DeveloperService() {
+        developerRepo = new HibernateDevRepoImpl();
     }
+
+    public DeveloperService(DeveloperRepo developerRepo) {
+        this.developerRepo = developerRepo;
+    }
+
+    public List<Developer> getAll() {return developerRepo.getAll();}
 
     public Developer getDeveloperById(Long id) {
         return developerRepo.getById(id);

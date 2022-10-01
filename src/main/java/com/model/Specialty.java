@@ -5,17 +5,22 @@ import jakarta.persistence.*;
 import java.util.Objects;
 
 @Entity
+@Embeddable
 @Table(name = "specialty")
 public class Specialty {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @GeneratedValue(generator = "increment")
     private Long id;
     @Column(name = "name")
     private String name;
 
     public Specialty() {
+    }
+
+    public Specialty(Long id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
     public Specialty(String name) {
@@ -59,3 +64,4 @@ public class Specialty {
                 '}';
     }
 }
+

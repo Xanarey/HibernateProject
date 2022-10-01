@@ -12,14 +12,13 @@ import java.util.Objects;
 public class Skill {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @GeneratedValue(generator = "increment")
     private Long id;
     @Column(name = "name")
     private String name;
 
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "skills", targetEntity = Developer.class)
-    private List<Developer> developers = new ArrayList<>();
+    @ManyToMany(targetEntity = Developer.class, mappedBy = "skills", cascade = CascadeType.ALL)
+    private List<Skill> skills = new ArrayList<>();
 
     public Skill() {
     }
@@ -49,20 +48,11 @@ public class Skill {
         this.name = name;
     }
 
-    public List<Developer> getDevelopers() {
-        return developers;
-    }
-
-    public void setDevelopers(List<Developer> developers) {
-        this.developers = developers;
-    }
-
     @Override
     public String toString() {
         return "Skill{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", developers=" + developers +
                 '}';
     }
 
@@ -71,11 +61,11 @@ public class Skill {
         if (this == o) return true;
         if (!(o instanceof Skill)) return false;
         Skill skill = (Skill) o;
-        return Objects.equals(getId(), skill.getId()) && Objects.equals(getName(), skill.getName()) && Objects.equals(getDevelopers(), skill.getDevelopers());
+        return Objects.equals(getId(), skill.getId()) && Objects.equals(getName(), skill.getName());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getName(), getDevelopers());
+        return Objects.hash(getId(), getName());
     }
 }

@@ -2,57 +2,47 @@ package com.model;
 
 import jakarta.persistence.*;
 
-
 import java.util.List;
+import java.util.Objects;
 
 @Entity
-@Table(name = "developers")
+@Table(name = "developers", schema = "postgres")
 public class Developer {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Id @GeneratedValue(generator = "increment")
     private Long id;
-    @Column(name = "firstName")
-    private String firstName;
-    @Column(name = "lastName")
-    private String lastName;
+    @Column(name = "firstname")
+    private String firstname;
+    @Column(name = "lastname")
+    private String lastname;
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private Status status;
     @Column(name = "specialty_id")
     private Long specialty_id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "specialty_id", referencedColumnName = "id", insertable = false, updatable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "specialty_id", insertable = false, updatable = false)
     private Specialty specialty;
 
-
-    @ManyToMany(targetEntity = Skill.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY, targetEntity = Skill.class, cascade = CascadeType.ALL)
     @JoinTable(name = "developers_skills",
-               joinColumns = @JoinColumn(name = "developers_id"),
-               inverseJoinColumns = @JoinColumn(name = "skills_id"))
+            joinColumns =
+            @JoinColumn(name = "developers_id"),
+            inverseJoinColumns =
+            @JoinColumn(name = "skills_id")
+    )
     private List<Skill> skills;
 
-    public List<Skill> getSkills() {
-        return skills;
-    }
+    public Developer() {}
 
-    public void setSkills(List<Skill> skills) {
-        this.skills = skills;
-    }
-
-    public Developer() {
-
-    }
-
-    public Developer(String firstName, String lastName, Status status, Long specialty_id, Specialty specialty, List<Skill> skillList) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public Developer(String firstname, String lastname, Status status, Long specialty_id, Specialty specialty, List<Skill> skills) {
+        this.firstname = firstname;
+        this.lastname = lastname;
         this.status = status;
         this.specialty_id = specialty_id;
         this.specialty = specialty;
-        this.skills = skillList;
+        this.skills = skills;
     }
 
     public Long getId() {
@@ -63,19 +53,21 @@ public class Developer {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setLastName(String lastName) {this.lastName = lastName;}
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
 
     public Status getStatus() {
         return status;
@@ -93,24 +85,45 @@ public class Developer {
         this.specialty_id = specialty_id;
     }
 
-    public Specialty getSpecialty() {return specialty;}
+    public Specialty getSpecialty() {
+        return specialty;
+    }
 
-    public void setSpecialty(Specialty specialty) {this.specialty = specialty;}
+    public void setSpecialty(Specialty specialty) {
+        this.specialty = specialty;
+    }
 
-    public List<Skill> getSkillList() {return skills;}
+    public List<Skill> getSkills() {
+        return skills;
+    }
 
-    public void setSkillList(List<Skill> skillList) {this.skills = skillList;}
+    public void setSkills(List<Skill> skills) {
+        this.skills = skills;
+    }
 
     @Override
     public String toString() {
         return "Developer{" +
                 "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
                 ", status=" + status +
                 ", specialty_id=" + specialty_id +
                 ", specialty=" + specialty +
-                ", skillList=" + skills +
+                ", skills=" + skills +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Developer developer = (Developer) o;
+        return Objects.equals(id, developer.id) && Objects.equals(firstname, developer.firstname) && Objects.equals(lastname, developer.lastname) && status == developer.status && Objects.equals(specialty_id, developer.specialty_id) && Objects.equals(specialty, developer.specialty) && Objects.equals(skills, developer.skills);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firstname, lastname, status, specialty_id, specialty, skills);
     }
 }

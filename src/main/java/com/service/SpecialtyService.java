@@ -9,7 +9,15 @@ import java.util.List;
 
 public class SpecialtyService {
 
-    private final SpecialtyRepo specialtyRepo = new HibernateSpecRepoImpl();
+    private final SpecialtyRepo specialtyRepo;
+
+    public SpecialtyService() {
+        specialtyRepo = new HibernateSpecRepoImpl();
+    }
+
+    public SpecialtyService(SpecialtyRepo specialtyRepo) {
+        this.specialtyRepo = specialtyRepo;
+    }
 
     public List<Specialty> getAll() {
         return specialtyRepo.getAll();

@@ -11,25 +11,20 @@ public class HibernateDevRepoImpl implements DeveloperRepo {
 
     @Override
     public List<Developer> getAll() {
-        Session session = HibernateUtil.getSession();
-        List<Developer> devList = session.createQuery("FROM Developer", Developer.class).list();
-        session.close();
-        return devList;
+        return HibernateUtil.getSession()
+                .createQuery("FROM Developer").list();
     }
 
     @Override
     public Developer getById(Long id) {
-        Session session = HibernateUtil.getSession();
-        Developer developer = session.get(Developer.class, id);
-        session.close();
-        return developer;
+        return HibernateUtil.getSession().get(Developer.class, id);
     }
 
     @Override
     public Developer insert(Developer developer) {
         Session session = HibernateUtil.getSession();
         session.beginTransaction();
-        session.persist(developer);
+        session.merge(developer);
         session.getTransaction().commit();
         session.close();
         return developer;
@@ -39,20 +34,17 @@ public class HibernateDevRepoImpl implements DeveloperRepo {
     public void deleteById(Long id) {
         Session session = HibernateUtil.getSession();
         session.beginTransaction();
-        Developer developer = session.get(Developer.class, id);
-        session.delete(developer);
+        session.remove(session.get(Developer.class, id));
         session.getTransaction().commit();
         session.close();
     }
 
     @Override
     public Developer update(Developer developer) {
-        Session session = HibernateUtil.getSession();
-        session.beginTransaction();
-        session.update(developer);
-        session.getTransaction().commit();
-        session.close();
+        insert(developer);
         return developer;
     }
 
 }
+
+
