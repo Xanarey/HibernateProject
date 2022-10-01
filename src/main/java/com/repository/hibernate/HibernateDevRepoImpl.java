@@ -6,13 +6,14 @@ import com.utils.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HibernateDevRepoImpl implements DeveloperRepo {
 
     @Override
     public List<Developer> getAll() {
-        List<Developer> developerList = null;
+        List<Developer> developerList = new ArrayList<>();
         Transaction transaction = null;
         try(Session session = HibernateUtil.getSession()) {
             transaction = session.beginTransaction();
@@ -26,7 +27,13 @@ public class HibernateDevRepoImpl implements DeveloperRepo {
 
     @Override
     public Developer getById(Long id) {
-        return HibernateUtil.getSession().get(Developer.class, id);
+        Developer developer = new Developer();
+        try (Session session = HibernateUtil.getSession()){
+            developer =  (Developer) session.createQuery("SELECT d FROM Developer d JOIN FETCH d.skills JOIN FETCH d.specialty WHERE d.id = 3").getSingleResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return developer;
     }
 
     @Override
