@@ -6,8 +6,8 @@ import com.utils.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import java.net.Inet4Address;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class HibernateDevRepoImpl implements DeveloperRepo {
@@ -20,8 +20,8 @@ public class HibernateDevRepoImpl implements DeveloperRepo {
             transaction = session.beginTransaction();
             developerList = session.createQuery("FROM Developer", Developer.class).list();
             transaction.commit();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Throwable t) {
+            return Collections.emptyList();
         }
         return developerList;
     }
@@ -39,21 +39,28 @@ public class HibernateDevRepoImpl implements DeveloperRepo {
 
     @Override
     public Developer insert(Developer developer) {
-        Session session = HibernateUtil.getSession();
-        session.beginTransaction();
-        session.merge(developer);
-        session.getTransaction().commit();
-        session.close();
+        Transaction transaction = null;
+        try (Session session = HibernateUtil.getSession()){
+            transaction = session.beginTransaction();
+            session.merge(developer);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null)
+                transaction.rollback();
+            e.printStackTrace();
+        }
         return developer;
     }
 
     @Override
     public void deleteById(Long id) {
-        Session session = HibernateUtil.getSession();
-        session.beginTransaction();
-        session.remove(session.get(Developer.class, id));
-        session.getTransaction().commit();
-        session.close();
+        try (Session session = HibernateUtil.getSession()){
+            session.beginTransaction();
+            session.remove(session.get(Developer.class, id));
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
